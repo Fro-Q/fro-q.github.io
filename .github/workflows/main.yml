@@ -5,6 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Build Vue
     steps:
-    - id: copy 404
+    - id: copy-404
       run: |
         cp index.html 404.html
