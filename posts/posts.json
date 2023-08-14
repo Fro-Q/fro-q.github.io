@@ -1,43 +1,15 @@
 {
   "posts": [
     {
-      "title": "正在做一个OB主题",
-      "abstract": "虽然在我认识的人里面用 Obsidian 的寥寥无几，但是还是想记录一下最近在干的事情。",
-      "date": "2023-07-09",
-      "tags": [
-        "obsidian",
-        "CSS"
-      ],
-      "fileName": "making-obsidian-theme"
-    },
-    {
       "title": "Prompt 入门",
       "abstract": "一些关于 prompt 的入门知识，包括一种基础的 prompt 格式、两种常用的 prompt 类型、prompt 的组成元素以及 prompt 设计的通用思维与方法。",
-      "date": "2023-06-29",
+      "date": "2023-06-28",
       "tags": [
         "ChatGPT",
         "Prompt"
       ],
-      "fileName": "basics-of-prompting"
-    },
-    {
-      "title": "需要时间",
-      "abstract": "遥感和毛概考完了，时间快来了。",
-      "date": "2023-06-21",
-      "tags": [
-        "talk"
-      ],
-      "fileName": "need-time"
-    },
-    {
-      "title": "What is Prompt?",
-      "abstract": "一篇关于「Prompt」的极极极简介绍。",
-      "date": "2023-06-16",
-      "tags": [
-        "ChatGPT",
-        "Prompt"
-      ],
-      "fileName": "what-is-prompt"
+      "fileName": "basics-of-prompting",
+      "content": "<p>前面提到过，在使用 ChatGPT 之类的 LLM 时，prompt 的质量决定了生成回复的质量，prompt 的质量则取决于其提供的信息。一个 prompt 所包含的信息可以有：&lt;u&gt;instruction、qusetion、context、inputs、examples&lt;/u&gt;[^1] 等，它们将引导模型给出更符合预期的结果。</p>\n<h1>一个简单的 prompt 格式</h1>\n<p>LLM 的本质是<strong>概率模型</strong>,即根据已有的 token 来预测下一个 token 的概率分布。如果<strong>提供的信息不充分</strong>或<strong>给出的引导不明确</strong>，LLM——如 ChatGPT——可能会给出一些预期之外的回答，所以早期的 LLM 会出现下面这类问题：\n<em>input:</em></p>\n<pre><code class=\"language-text\">I want to\n</code></pre>\n<p><em>ouput:</em></p>\n<pre><code class=\"language-text\">see a movie.\n</code></pre>\n<p>目前，ChatGPT 已经在一定程度上解决了这个问题。对于以上输入，ChatGPT 给出的回复是：</p>\n<pre><code class=\"language-text\">Certainly! How can I assist you today? Please provide me with more details or let me know what you would like to do, and I'll do my best to help you.\n</code></pre>\n<p>但无论如何，在 prompt 中向 LLM 明确其需要完成的任务是非常重要的。一个简单的 prompt 格式——Question Answering(<strong>QA</strong>) 模式，可以表示为：</p>\n<pre><code class=\"language-text\">Q: &lt;Question&gt;?\nA:\n</code></pre>\n<h1>两种常用的 Prompt 类型</h1>\n<p>向 ChatGPT 询问「<strong>什么是 GPT？</strong>」：</p>\n<pre><code class=\"language-text\">Q: What is GPT?\nA:\n</code></pre>\n<p>上面这种<strong>不提供 examples</strong> 的 prompt 被称为「<strong>Zero-shot Prompt</strong>」。虽然 LLM 具备应答 Zero-shot Promp 的能力，但如果问题过于复杂、描述具有歧义或者需要指定输出格式，则通常需要提供一些 examples 以增强对于<strong>任务类型</strong>、<strong>涉及领域</strong>、<strong>回答格式</strong>等的指向性。如：</p>\n<pre><code class=\"language-text\">Q: What is LLM?\nA: LLM stands for Large Language Model.\nQ: What is NLP?\nA: NLP stands for Natural Language Processing.\nQ: What is GPT?\nA:\n</code></pre>\n<p>得到的结果会更加符合预期（虽然在这一个例子、这一次实践中，仍没有做到格式上与 examples 的完全统一）：</p>\n<pre><code class=\"language-text\">GPT stands for &quot;Generative Pre-trained Transformer.&quot; It is a type of large language model developed by OpenAI.\n</code></pre>\n<p>上面这种提供 examples 的 prompt 被称为「<strong>Few-shot Prompt</strong>」。</p>\n<h1>Prompt 的组成</h1>\n<p>关于 prompt 的组成，学者们给出了不同的意见。</p>\n<p>澳大利亚未来学家 <em>Ross Dawson</em> 认为 prompt 的主要组成元素包括[^2]：</p>\n<ul>\n<li>Persona（角色）</li>\n<li>Context（语境）</li>\n<li>Audience（受众）</li>\n<li>Instructions（指令）</li>\n<li>Style（风格）</li>\n<li>Format（格式）</li>\n<li>Examples（范例）</li>\n<li>Variability（变量）</li>\n<li>Constraints（限制）</li>\n<li>Refinement（改进）</li>\n</ul>\n<p>Microsoft 在 <em>Azure OpenAI Service Documentation</em> 中将 prompt 的组成阐述为[^3]：</p>\n<ul>\n<li>Instructions（指令）</li>\n<li>Primary content（主要内容）</li>\n<li>Examples（范例）</li>\n<li>Cue（提示）</li>\n<li>Supporting content（支持内容）</li>\n</ul>\n<p>虽然各种观点看似差异较大，但总地来说，prompt 的组成元素可以被形容为[^4]：</p>\n<ul>\n<li>Instructions（指令）</li>\n<li>Context（语境）</li>\n<li>Input data（输入数据）</li>\n<li>Output Indicator（输出指示）</li>\n</ul>\n<h1>TIPS</h1>\n<p>具体的 prompt 设计技巧与规范我会在后面的文章里详细介绍，这里先罗列出一些在使用 ChatGPT 时需要注意的原则。</p>\n<h2>明确表达</h2>\n<p>对于一些特定的要求（如字数要求（基本就没听话过）），即使提供了非常明确的信息，ChatGPT 也时常给出不符合要求的回答。但无论如何，<strong>进行尽可能明确的表达</strong>能够显著提高回答的可靠性与有效性。注意，这里的「明确」包括<strong>词意</strong>、<strong>语意</strong>以及<strong>语境</strong>层面。下面提供了一些负面案例：</p>\n<pre><code class=\"language-text\">用几句话来解释一下写 prompt 需要注意的事。\n----------\n用 3 - 5 句话阐述 prompt 编写中能够提高回复质量的技巧。\n</code></pre>\n<p>或：</p>\n<pre><code>我今天要写一个实验报告，有点多，老师让我们明天交，我都不知道怎么开头。你帮我写一个开头吧。\n----------\n我需要写一篇实验报告，课程名称是《GIS 算法与数据结构》，实验报告的结构为：实验预习报告（实验目的、实验原理、实验设备）、实验过程记录、实验结果（结论、小结、建议、体会）。以下是实验内容的更多信息：\n    {content}\n请帮我写第一篇实验报告的实验预习部分，不超过 500 字。\n</code></pre>\n<h2>拆分任务</h2>\n<p>对任务进行拆分一方面可以避免 ChatGPT 由于单次生成文字的限制而导致的<strong>回答中断</strong>，另一方面可以<strong>基于各个子任务对其进行更精确的引导</strong>以得到更可靠的回复。如对于「一篇论文的撰写」这个任务，可以将任务拆分为「确定论文框架」、「确定论文标题」、「确定写作大纲」、「各部分内容的撰写」、「检查与修正」等。</p>\n<h2>善用迭代</h2>\n<p>ChatGPT 毕竟不是完美的产品，所以难免会出现生成的回复与预期不符的情况。在使用时根据实际情况，<strong>修正</strong>与<strong>改进</strong> prompt，才能使回复逐渐趋近于用户的期望。</p>\n<h2>扬长避短</h2>\n<p>作为一个 LLM，ChatGPT 有其擅长与不擅长的领域。它<strong>擅长</strong>创造、设计方案、回答普适性知识、无中生有（「螺丝钉炒面是一道中国家常菜」）等；它<strong>不擅长</strong>数数（经常算错字数）、回答实时性问题、中文词辨识等等。在实际运用中，尽量避免涉及其不擅长的工作，对提升回答的质量与稳定用户的心情都具有莫大的益处。</p>\n<p>[^1]: Prompt Engineering Guide, <a href=\"https://www.promptingguide.ai/introduction/basics\">Basics of Prompting</a>\n[^2]: Ross Dawson, <a href=\"https://rossdawson.com/humans-plus-ai/humans-ai-prompt_elements/\">Humans + AI: Prompt Elements</a>\n[^3]: Microsoft, <a href=\"https://learn.microsoft.com/en-us/azure/cognitive-services/openai/concepts/prompt-engineering#cue\">Introduction to prompt engineering</a>\n[^4]: Prompt Engineering Guide, <a href=\"https://www.promptingguide.ai/introduction/elements\">Elements of a Prompt</a></p>\n"
     },
     {
       "title": "好久不见:P",
@@ -46,7 +18,40 @@
       "tags": [
         "talk"
       ],
-      "fileName": "long-time-no-see"
+      "fileName": "long-time-no-see",
+      "content": "<h1>最近</h1>\n<p><a href=\"https://mp.weixin.qq.com/s?__biz=Mzg3Mjc2MDE2OA==&amp;mid=2247483963&amp;idx=1&amp;sn=bf3d40c677e588cd9c1fdf1a23ba7144&amp;chksm=ceeb143cf99c9d2a2746ab153396f3053c6e2f15eb42c5fc03d025eedcedf5453b209f42d21b&amp;token=1755124329&amp;lang=zh_CN#rd\">上一次公众号</a>更新是在 4 月 5 日，关于一个辩论题略有所思。</p>\n<p>莫名其妙就过了一个月，一个月没写东西。不过是狭义上的没写东西，广义上来说其实最近一次平台文字更新在 5 月 4 日，是<a href=\"https://www.cnblogs.com/ypsr/articles/17372913.html\">博客园</a>的一系列学习资料。不算是<strong>写作</strong>。</p>\n<p>最近鼓捣博客网站很久。博客园那个也搞了一两天（点<a href=\"https://www.cnblogs.com/ypsr/\">这里</a>可以去看看）。不过由于三件套不太熟练，所以还是找的模版，只进行了一些小改动，有人有兴趣的话可以给我留言，后续出个简明教程。网上那些教程或多或少有点问题。</p>\n<p>现在正在鼓捣的这个叫 Gridea（<a href=\"https://github.com/getgridea/gridea\">see in GitHub</a>），本质上是基于 Git 的静态网页，不过作者把功能直接整合成了一个客户端，使得配置网站样式、Push &amp; Pull 等等操作完全可以用 UI 实现，对于不熟悉三件套的人来说非常友好；而且这个客户端的 MD 编辑器手感莫名非常好，大家有兴趣也可以试试。这个可以直接去网上找教程，有几个写得很清楚。</p>\n<h1>大家都在用 ChatGPT</h1>\n<p>很难想象，这个东西才出来半年左右。</p>\n<p>ChatGPT 只是一个 GPT，有人拿它当 AI 来用，期望它能像 AI 一样用，可能还是没有完全明白这个东西。</p>\n<p>我鼓捣 GPT 也很久了，在使用上算是略有心得吧。后续可能会出一些关于 Prompt 的教学，帮助大家更好地理解和使用这个小玩意。</p>\n<p>BTW，编程开发相关的同学可能尝试一下 <a href=\"https://github.com/features/copilot/\">GitHub Copilot</a>，体验还是不错的，不过要学东西还是老老实实手搓吧。</p>\n<p>总之这次就先这样，后面这段时间应该会加大更新力度，躺了好久稍微站起来一下。</p>\n"
+    },
+    {
+      "title": "正在做一个OB主题",
+      "abstract": "虽然在我认识的人里面用 Obsidian 的寥寥无几，但是还是想记录一下最近在干的事情。",
+      "date": "2023-07-08",
+      "tags": [
+        "obsidian",
+        "CSS"
+      ],
+      "fileName": "making-obsidian-theme",
+      "content": "<p>为什么突然想到自己做一个 theme 呢？</p>\n<h2>metion——初识 Markdown</h2>\n<p>我用 <a href=\"https://obsidian.md/\">Obsidian</a> 快一年了，但是第一次接触它是在高考完的暑假。当时通过 <a href=\"https://apps.apple.com/cn/app/metion-%E4%B8%AD%E6%96%87%E5%86%99%E4%BD%9C%E8%80%85%E7%9A%84%E7%AC%94%E8%AE%B0%E5%B7%A5%E5%85%B7/id1530965242\">metion</a>（由于没找到官网所以放了 App Store 的链接）第一次接触到 <em>Markdown</em>，心想文本编辑还能这么玩？</p>\n<p><img src=\"/public/img/metion-for-mac-ui.png\" alt=\"metion Mac 版的 UI\"></p>\n<blockquote>\n<p>metion 宣传为「&lt;u&gt;颜值高也好用，懂中文也懂 Markdown&lt;/u&gt;」。它的确成功地为中文写作进行了很大程度的优化：它支持在中英文字词之间自动添加空格；它支持中文的词性分析；它使用左右 shift 键能够在不切换输入法的情况下键入不同的符号（如对于中文的左书名号键，使用 <code>左shift</code> 能够键入 <code>《</code> ，而使用 <code>右shift</code> 能够键入 <code>&gt;</code> ）；它支持将文本直接导出为公众号格式（懒得调格式的公众号作者福音）……</p>\n</blockquote>\n<p>在那之后，我陷入了一阵对 Markdown 的狂热。我在 iPad 上下载了一大批支持 Markdown 的笔记软件，其中就包括 <strong>Obsidian</strong>。但是当时由于不太会用，加上 iPadOS 端的 Obsidian 还存在一些 bug，导致当时<strong>没有能够成功使用</strong>。其他的诸如 <a href=\"https://bear.app/cn/\">Bear</a>、 <a href=\"https://www.notion.so/product?fredir=1\">Notion</a>、 <a href=\"https://agenda.com\"><em>Aganda</em></a>（严格意义上来说不算<strong>笔记</strong>软件）、 <a href=\"https://www.mweb.im/cn/index.html\">MWeb</a> 等等，我都进行了一定程度的体验。它们都是合格的 Markdown 编辑器，只是&lt;u&gt;我口味比较刁&lt;/u&gt;。所以在一番尝试之后，我暂时还是用着 iPad 上的 metion 作为码字工具。</p>\n<h2>MarkText——初识 CSS</h2>\n<p>metion 在很长一段时间内是我的主力写作工具，公众号前期的文章也都是用 metion 直接导出的格式。后来由于转战 Windows 平台，我又开始了一波试用和筛选，尝试了 <a href=\"https://typora.io/#download\">Typora</a>、 <a href=\"https://www.effie.co\">Effie</a>、 <a href=\"https://www.zybuluo.com/cmd/\">CMD Markdown</a> 等软件。后来由于 &lt;u&gt;Typora 收费与不开源&lt;/u&gt;、&lt;u&gt;Effie 对 Markdown 的不完整的支持&lt;/u&gt;、&lt;u&gt;CMD Markdown 不支持即时渲染&lt;/u&gt;等原因，我选择了一款号称 <strong>Typora 平替</strong>的<strong>开源免费</strong>Markdown 编辑器： <a href=\"https://github.com/marktext/marktext\">MarkText</a>。</p>\n<p>作为一个免费的软件，MarkText 几乎是超出了我的预期。在将近半年的使用中，我感到相当的舒适。在主要的编辑功能中，它与 Typora 基本无异，至少我没发现什么特别残缺的功能与特别恶性的 bug。但是由于&lt;u&gt;失去了 metion 的「导出为公众号格式」&lt;/u&gt;，我需要折腾文章的格式的再复制上去。这个时期我用到了两个 Markdown 转公众号格式的网页来帮我进行格式化： <a href=\"http://md.aclickall.com\">Md2All</a> 和 <a href=\"https://md.openwrite.cn\">openwrite</a>。Generally speaking，后者的默认格式更符合我的审美，但是其缺少了对部分 Markdown 语法的支持，如使用 <code>[TOC]</code> 来生成一个 TOC 的功能。所以在后期，我放弃了 openwrite，<strong>被迫</strong>学习了一部分 CSS 知识，用于在 Md2All 里对样式、排版等进行设计。</p>\n<p><img src=\"/public/img/css-in-md2all.png\" alt=\"Md2All 里的 CSS 片段\"></p>\n<h2>Obsidian——NOW WE'RE TALKING</h2>\n<p>MarkText 说到底只是<strong>编辑器</strong>，而随着对笔记体系的逐渐完善，我开始产生对更高维度的功能的需求。恰逢此时，我接触到了 <em>Zettelkasten</em>。</p>\n<blockquote>\n<p><a href=\"https://en.wikipedia.org/wiki/Zettelkasten\">Zettelkasten</a> 是德国社会学家 Niklas Luhmann 提出的概念，翻译成英语就是 Box of Notes，也即<strong>卡片盒笔记法</strong>，在这里不进行过多解释，感兴趣的朋友可以自己去了解。Obsidian 的理念与 Zettelkasten 非常兼容，它提供了<strong>双向链接</strong>、<strong>图谱视图</strong>、<strong>tag</strong>和<strong>搜索</strong>等功能，便于创建、连接和浏览笔记，从而建立<strong>知识网络</strong>并使其逐渐丰富。</p>\n</blockquote>\n<p>也正是这个时候，我开始<strong>正式地</strong>使用上了 Obsidian。不得不说，在接近两个学期的使用中，它确实为我提供了极大的帮助。虽然在初期，由于&lt;u&gt;插件社区&lt;/u&gt;和&lt;u&gt;主题社区&lt;/u&gt;生态过于优秀，我陷入过一阵疯狂捣鼓插件和主题的时期，不过后来由于精力不足，加之我逐渐了「形式主义」，便退烧了。</p>\n<p><img src=\"/public/img/theme-store-obsidian.png\" alt=\"Obsidian 的插件市场\"></p>\n<h2>投身主题开发</h2>\n<p>退烧归退烧，<strong>需求</strong>还是有的。但我始终感觉用别人做的东西不太舒服。制作者毕竟很难无微不至地考虑到每一个客户端的需求。在刚萌生开发主题这个想法的时候，我的策略是&lt;u&gt;对已有的、相对较完善的主题 CSS 进行修改&lt;/u&gt;，基于 <a href=\"https://github.com/mgmeyers/obsidian-style-settings\">Style Settings</a> 插件对其提供的设置接口进行调整，并增加我认为重要的、常用的设置选项。</p>\n<p><img src=\"/public/img/change-based-on-serenity.png\" alt=\"基于 Serenity 主题进行修改的过程\"></p>\n<p>但是在一段时间后，我发现这样的方式极度依赖于原作者的代码，导致我对代码的理解能力与几乎没有进步，操作流程基本上是&lt;u&gt;注掉、看区别、适当修改&lt;/u&gt;，效率极低且没有收益。所以再三思考后还是决定自己从头开始写一个，也当作学前端了。</p>\n<p><img src=\"/public/img/writing-css.png\" alt=\"test.css\"></p>\n<p>目前整个开发还处于很前期的阶段，除了提供了一些配色更改的设置、对一些内置样式如 <strong>strong</strong>、<em>emphasis</em>、==highlight== 进行了修改之外，UI 的美化、其他元素（ol、il、code、callout 等）的样式设计、文章排版之类的任务还暂时没有进行。不过问题不大，早晚而已。</p>\n<p>前两天在 puq 发的那个「调查」，就是由于我发现在中文编辑中，<strong>斜体</strong> <em>italic</em> 的应用面似乎很窄，所以在考虑要不要弃用掉 italic 的设计而将 em 元素应用其他的样式。还在思考中。</p>\n<hr>\n<p>这次扯得有点多。希望下次能少扯点。</p>\n"
+    },
+    {
+      "title": "需要时间",
+      "abstract": "遥感和毛概考完了，时间快来了。",
+      "date": "2023-06-21",
+      "tags": [
+        "talk"
+      ],
+      "fileName": "need-time",
+      "content": "<h1>考试</h1>\n<p>本学期最大的两科——遥感和毛概——考完了，明天后天没有考试，不用很紧，慢慢溜溜看看地质学看看算法与数据结构看看英语，这学期就完全结束了。</p>\n<p>很气，我大概记得起来 TM 的第 6 波段和全色波段的分辨率一个 15m 一个 60m，但是说实话有点记不清楚谁是谁，本来写的是对的，但是保险起见改成了两个 15m，总能对一个。保守派。</p>\n<p>其实还好，些微有点可惜，但是我也不认为这是我应该拿到的分，毕竟我确实印象不是特别深，归根结底还是我的问题。直面问题，不找借口。</p>\n<h1>忙</h1>\n<p>最近感觉特别忙。上周在赶遥感实验报告和实习报告、习思想报告，三天睡了五个小时；赶完了马上来整理之前没整理完的遥感笔记，整理完了忙着背，昨天下午考完了遥感今天上午就毛概，纯不给喘息时间，这两天也没睡几个小时。</p>\n<p>感觉我现在极度需要时间。有很多事情需要我花很多时间去做，但是暂时不举例了。这段时间一直忙着干学校的事，自己的事很少顾到。但是问题不是很大，毕竟暑假里我有一个多月的时间来干这些事，而且某些东西是长线计划，反正总之是不太急的。</p>\n<h1>后续</h1>\n<p>后续可能会有一些值得期待的行动，毕竟一个多月的纯 Spare Time，有点想入非非了已经。</p>\n"
+    },
+    {
+      "title": "What is Prompt?",
+      "abstract": "一篇关于「Prompt」的极极极简介绍。",
+      "date": "2023-06-15",
+      "tags": [
+        "ChatGPT",
+        "Prompt"
+      ],
+      "fileName": "what-is-prompt",
+      "content": "<p>「<em>Prompt</em>」是什么？</p>\n<p>由于知识储备的欠缺，这个词的起源我不太能追溯到。但相信在 GPT 时代，大家或多或少都听过这个词。关于「Prompt」，网络上有很多很多的解释：&lt;u&gt;often contains instructions and examples of what you’d like the LLM to do&lt;/u&gt;[^1]、&lt;u&gt;instructions issued to a computer system (such as a text-to-image artificial intelligence) in the form of written or spoken language&lt;/u&gt;[^2]、&lt;u&gt;an instruction or discussion topic a user provides for the ChatGPT AI model to respond to&lt;/u&gt;[^3]……简单概括一下就是：Prompt 是<strong>输入到语言模型中的指示性、引导性信息</strong>。</p>\n<p>很多朋友可能在体验 ChatGPT 的时候可能感觉它并没有别人吹的那么惊艳，觉得它不听话、回答毫无价值，废话连篇、不符合期望。我想这部分朋友可能对它的定位和能力有一点误解。所以我在这里大概介绍一下 ChatGPT 这个玩意。</p>\n<p><em>ChatGPT</em> 是 <a href=\"https://openai.com\">OpenAI</a> 开发的一个聊天机器人程序，它&lt;u&gt;使用基于 GPT-3.5、GPT-4 架构的大语言模型（Large Language Model, LLM）并以强化学习（Reinforcement Learing, RL）训练&lt;/u&gt;[^4]。它具有很强的处理<strong>自然语言</strong>的能力，可以真正意义上理解用户输入的文本，并生成一个回答。在一些简单的情况下，它的回答还是相对靠谱的。但是由于我们平时使用的自然语言通常<strong>省略了很多逻辑细节和前提条件</strong>，所以当我们使用人类间交流的日常语言来进行输入时，ChatGPT 生成的答案可能并不总是会符合用户的预期。所以在使用 ChatGPT 以及其他的 LLM 时，给出合理的 Prompt 就十分重要了。</p>\n<p>对比下面两个 Prompt，虽然都不是很具有编写 Prompt 的规范性，但还是高下立判。</p>\n<pre><code class=\"language-text\">有什么好听的歌曲推荐？\n</code></pre>\n<pre><code class=\"language-text\">你是一名专业的音乐鉴赏师，为一个平常一般听 Mandopop、Cantopop、Contemporary Folk 的年轻男性推荐 5 - 10 首歌曲。\n</code></pre>\n<p>可以明显地看出，第二个 Prompt 比第一个提供了更多的信息（音乐类型），并作出了一些限制（歌曲数量），还为 LLM 设定了一个实际的角色。总的来说，第二个 Prompt 可以被认为是一个合格的、有效的 Prompt。</p>\n<p>根据不同的分类方式，Prompt 可以被分成不同的类型。最常见的分类是依据样本的数量将其分为 <em>Zero-Shot Prompt</em> 和 <em>Few-Shot Prompt</em>。前者不向模型提供相关的实例，如</p>\n<pre><code class=\"language-text\">Translate Flower to Spanish.\n</code></pre>\n<p>Few-Shot Prompt 则允许模型在少量示例或指导信息的帮助下生成回答，如：</p>\n<pre><code class=\"language-text\">English: music\nSpanish: música\nEnglish: father\nSpanish: padre\nEnglish: flower\nSpanish: {}\n</code></pre>\n<p>Prompt 的编写相当值得学习。后续的文章中我会进一步介绍其常见的的编写规范与技巧。</p>\n<hr>\n<h2>Reference</h2>\n<p>[^1]: andrew makes things, <a href=\"https://blog.andrewcantino.com/blog/2021/04/21/prompt-engineering-tips-and-tricks/\">Prompt Engineering Tips and Tricks with GPT-3</a>\n[^2]: Wikipedia, <a href=\"https://en.wikipedia.org/wiki/Prompt\">Prompt</a>\n[^3]: Vincent Terrasi, <a href=\"https://www.searchenginejournal.com/how-to-write-chatgpt-prompts/479324/#close\">How To Write ChatGPT Prompts To Get The Best Results</a>\n[^4]: Wikipedia, <a href=\"https://zh.wikipedia.org/wiki/ChatGPT\">ChatGPT</a></p>\n"
     }
   ]
 }
