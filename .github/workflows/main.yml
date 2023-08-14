@@ -5,12 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Build Vue
     steps:
-    - uses: actions/checkout@v2
-    - id: Build-Vue
-    - run: |
+    - id: copy-404
+      run: |
         cp index.html 404.html
-    - uses: xRealNeon/VuePagesAction@1.0.1
-      with:
-        username: 'Fro-Q'
-        reponame: 'Fro-Q.github.io'
-        token: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
